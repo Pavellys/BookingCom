@@ -35,4 +35,14 @@ public class BookingSteps {
         }
         Assert.assertTrue(hotelsNames.contains(hotel));
     }
+
+    @And("Rating of the hotel {string} is {string}")
+    public void ratingIs(String hotel, String rate) {
+        ArrayList<String> hotelsText = new ArrayList<>();
+        for(SelenideElement element : $$(By.xpath("//*[@id='hotellist_inner']/div[@data-et-click ][1]"))) {
+            hotelsText.add(element.getText());
+        }
+        Assert.assertTrue(hotelsText.contains(hotel));
+        Assert.assertTrue(hotelsText.contains(rate));
+    }
 }
