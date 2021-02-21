@@ -37,12 +37,9 @@ public class BookingSteps {
     }
 
     @And("Rating of the hotel {string} is {string}")
-    public void ratingIs(String hotel, String rate) {
-        ArrayList<String> hotelsText = new ArrayList<>();
-        for(SelenideElement element : $$(By.xpath("//*[@id='hotellist_inner']/div[@data-et-click ][1]"))) {
-            hotelsText.add(element.getText());
-        }
-        Assert.assertTrue(hotelsText.contains(hotel));
-        Assert.assertTrue(hotelsText.contains(rate));
+    public void ratingOfTheHotel(String hotel, String rate){
+        Assert.assertEquals($(By.xpath(String.format("//*[contains(@class, 'sr-hotel__name') and contains(text(), '%s')]"
+        + "/ancestor::*[contains(@class, 'sr_item_content_slider_wrapper')]" +
+                "//*[@class='bui-review-score__badge']", hotel))).getText(), rate);
     }
 }
